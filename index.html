@@ -32,12 +32,26 @@
         }
         body {
             overflow: hidden;
+			padding:0;
+			margin:0;
         }
+		#base{
+			background-color:black;
+			width:100vw;
+			height:100vh;
+			font-size:144px;
+			color:white;
+			display:flex;
+			justify-content:center;
+			align-items:center;
+			padding:0;
+		}
     </style>
 </head>
 <body>
+	<div id='base'>
+	</div>
     <canvas id=c></canvas>
-<p>From the codepals to <a href="https://codepen.io/tmrDevelops">Barrownz</a><span>, by <a href="https://codepen.io/towc">Er Robin</a></span></p>
 <script>
     var w = c.width = window.innerWidth,
 		h = c.height = window.innerHeight,
@@ -421,6 +435,8 @@ function anim(){
 			letters[ l ].reset();
 }
 
+let start=setInterval(function(){
+clearInterval(start);
 for( var i = 0; i < opts.strings.length; ++i ){
 	for( var j = 0; j < opts.strings[ i ].length; ++j ){
 		letters.push( new Letter( opts.strings[ i ][ j ], 
@@ -428,9 +444,17 @@ for( var i = 0; i < opts.strings.length; ++i ){
 														i * opts.lineHeight + opts.lineHeight / 2 - opts.strings.length * opts.lineHeight / 2 ) );
 	}
 }
-
 anim();
+},10000)
 
+let cnt=10;
+let base=document.getElementById('base')
+
+let counter=setInterval(function(){
+base.innerText=cnt;
+cnt--;
+if(cnt==0) clearInterval(counter)
+},1000)
 window.addEventListener( 'resize', function(){
 	
 	w = c.width = window.innerWidth;
